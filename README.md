@@ -168,9 +168,41 @@ docker compose run --rm test-headless
 
 ---
 
-## Problema 5: Exemplos do pymadcad com erros
+## Problema 5: Exemplos não funcionan (note_* funções faltando)
 
 ### Sintoma
+```
+NameError: name 'note_radius' is not defined
+NameError: name 'note_leading' is not defined
+NameError: name 'note_distance' is not defined
+```
+
+### Causa
+Funções existem em `madcad.scheme` mas não são exportadas no `madcad.__init__`.
+
+### Solução needed
+Adicionar ao `madcad/__init__.py`:
+```python
+from madcad.scheme import note_radius, note_leading, note_distance
+```
+
+### Exemplos Testados
+
+**OK (abrem janela):**
+- bearing.py, elliptic-gearbox.py
+- kinematic-compound-planetary.py, kinematic-planetary.py, planetary-gearbox.py
+
+**Com erros (12):**
+- axis-holder.py, birfield.py, compound-planetary.py
+- differential-asymetric.py, differential-symetric.py, double-universal-joint.py
+- nut.py, offscreen.py, universal-joint.py
+- elliptic-gearbox-traversing.py (settings.primitives)
+- screenshots.py (matchclosest)
+- text.py (TriangulationError)
+
+---
+
+## Teste de Exemplos
 Alguns exemplos não executam:
 
 ```
