@@ -10,22 +10,19 @@ os.environ.setdefault("LIBGL_ALWAYS_SOFTWARE", "1")
 
 EXAMPLES = {
     "1": ("bearing", "pymadcad/examples/bearing.py", "Bearing with balls"),
-    "2": ("nut", "pymadcad/examples/nut.py", "Standard nut"),
-    "3": ("axis-holder", "pymadcad/examples/axis-holder.py", "Axis holder"),
-    "4": ("universal-joint", "pymadcad/examples/universal-joint.py", "Universal joint"),
-    "5": (
-        "planetary-gearbox",
-        "pymadcad/examples/planetary-gearbox.py",
-        "Planetary gearbox",
-    ),
-    "6": ("text", "pymadcad/examples/text.py", "3D text"),
-    "7": (
+    "2": (
         "kinematic-planetary",
         "pymadcad/examples/kinematic-planetary.py",
         "Kinematic planetary",
     ),
-    "8": ("offscreen", "pymadcad/examples/offscreen.py", "Offscreen rendering"),
 }
+
+# Known broken with pymadcad 0.19.1 (functions not defined):
+# - nut.py: note_leading not defined
+# - axis-holder.py: note_leading not defined
+# - universal-joint.py: note_radius not defined
+# - text.py: TriangulationError
+# - planetary-gearbox.py: various issues
 
 
 def main():

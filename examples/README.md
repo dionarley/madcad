@@ -5,19 +5,29 @@ Scripts para abrir exemplos do pymadcad.
 ## Uso
 
 ```bash
-# Rodar exemplo do rolamento (bearing)
-./examples/run_bearing.sh
+# Launcher interativo
+python3 run_example.py
 
-# Rodar exemplo de porca (nut)
-./examples/run_nut.sh
+# Ou direto
+./examples/run_bearing.sh
 ```
 
-## Exemplos Disponíveis
+## Exemplos Testados (funcionando com pymadcad 0.19.1)
 
-| Script | Exemplo |
-|--------|--------|
-| `run_bearing.sh` | Rolamento com esferas |
-| `run_nut.sh` | Porca padrão |
+| Exemplo | Status |
+|---------|--------|
+| bearing | ✅ OK |
+| kinematic-planetary | ✅ OK |
+
+## Exemplos com Bugs (pymadcad 0.19.1)
+
+| Exemplo | Erro |
+|---------|------|
+| nut | `note_leading` not defined |
+| axis-holder | `note_leading` not defined |
+| universal-joint | `note_radius` not defined |
+| text | TriangulationError |
+| planetary-gearbox | various |
 
 ## Requisitos
 
@@ -25,9 +35,6 @@ Scripts para abrir exemplos do pymadcad.
 pip install pymadcad==0.19.1
 pip install processional
 pip install uimadcad
-```
 
-Exportar:
-```bash
 export LIBGL_ALWAYS_SOFTWARE=1
 ```
