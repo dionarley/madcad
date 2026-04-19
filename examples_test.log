@@ -1,0 +1,198 @@
+# pymadcad Examples Test Log
+# Date: 2026-04-19T17:14:40.445027
+# Total: 17 examples
+============================================================
+
+## axis-holder.py
+Status: error
+----------------------------------------
+Error:
+/home/dnly/.local/share/mise/installs/python/3.14.2/lib/python3.14/site-packages/scipy/optimize/_lsq/least_squares.py:905: UserWarning: Setting `ftol` below the machine epsilon (2.22e-16) effectively disables the corresponding termination condition.
+  ftol, xtol, gtol = check_tolerance(ftol, xtol, gtol, method)
+/home/dnly/.local/share/mise/installs/python/3.14.2/lib/python3.14/site-packages/scipy/optimize/_lsq/least_squares.py:905: UserWarning: Setting `gtol` below the machine epsilon (2.22e-16) effectively disables the corresponding termination condition.
+  ftol, xtol, gtol = check_tolerance(ftol, xtol, gtol, method)
+Traceback (most recent call last):
+  File "/home/dnly/stage/madcad/pymadcad/examples/axis-holder.py", line 117, in <module>
+    note_leading(part.group(2), text="conic surface"),
+    ^^^^^^^^^^^^
+NameError: name 'note_leading' is not defined
+
+
+## bearing.py
+Status: timeout
+----------------------------------------
+Output:
+Timeout (window likely opened)
+
+## birfield.py
+Status: error
+----------------------------------------
+Error:
+Traceback (most recent call last):
+  File "/home/dnly/stage/madcad/pymadcad/examples/birfield.py", line 107, in <module>
+    note_distance(O, rotate(pi/2 + pi/nballs, Z) * rscrews*Y, offset=1.5*rsphere*Z),
+    ^^^^^^^^^^^^^
+NameError: name 'note_distance' is not defined
+
+
+## compound-planetary.py
+Status: error
+----------------------------------------
+Error:
+Traceback (most recent call last):
+  File "/home/dnly/stage/madcad/pymadcad/examples/compound-planetary.py", line 119, in <module>
+    bearing = bearing(2*bearing_rint, 2*bearing_rext, bearing_height) .transform(bearing_center)
+              ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/dnly/stage/madcad/pymadcad/examples/compound-planetary.py", line 19, in bearing
+    note_distance(O, dint/2*X),
+    ^^^^^^^^^^^^^
+NameError: name 'note_distance' is not defined
+
+
+## differential-asymetric.py
+Status: error
+----------------------------------------
+Error:
+Traceback (most recent call last):
+  File "/home/dnly/stage/madcad/pymadcad/examples/differential-asymetric.py", line 59, in <module>
+    out_gear = sbevelgear(gear_step, axis_z, pi/2-transmiter_angle,
+    				bore_radius=output_radius,
+    				bore_height=1.2*bearing_height,
+    				helix_angle = helix_angle,
+    				)
+  File "/home/dnly/stage/madcad/pymadcad/examples/differential-asymetric.py", line 16, in sbevelgear
+    note_radius(part.group(part.groupnear(top+z*step*X))),
+    ^^^^^^^^^^^
+NameError: name 'note_radius' is not defined
+
+
+## differential-symetric.py
+Status: error
+----------------------------------------
+Error:
+Traceback (most recent call last):
+  File "/home/dnly/stage/madcad/pymadcad/examples/differential-symetric.py", line 107, in <module>
+    note_radius(transmiter['bearing']['part'].group(1)),
+    ^^^^^^^^^^^
+NameError: name 'note_radius' is not defined
+
+
+## double-universal-joint.py
+Status: error
+----------------------------------------
+Error:
+Traceback (most recent call last):
+  File "/home/dnly/stage/madcad/pymadcad/examples/double-universal-joint.py", line 170, in <module>
+    side = cardan_side(rint*1.02, rext, rext*0.25, thickness, rext*2)
+  File "/home/dnly/stage/madcad/pymadcad/examples/double-universal-joint.py", line 97, in cardan_side
+    note_radius(result.group('axis')),
+    ^^^^^^^^^^^
+NameError: name 'note_radius' is not defined
+
+
+## elliptic-gearbox-traversing.py
+Status: error
+----------------------------------------
+Error:
+Traceback (most recent call last):
+  File "/home/dnly/stage/madcad/pymadcad/examples/elliptic-gearbox-traversing.py", line 8, in <module>
+    settings.primitives['curve_resolution'] = ('sqradm', 0.8)
+    ^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'madcad.settings' has no attribute 'primitives'
+
+
+## elliptic-gearbox.py
+Status: timeout
+----------------------------------------
+Output:
+Timeout (window likely opened)
+
+## kinematic-compound-planetary.py
+Status: ok
+----------------------------------------
+
+## kinematic-planetary.py
+Status: ok
+----------------------------------------
+
+## nut.py
+Status: error
+----------------------------------------
+Error:
+/home/dnly/.local/share/mise/installs/python/3.14.2/lib/python3.14/site-packages/scipy/optimize/_lsq/least_squares.py:905: UserWarning: Setting `gtol` below the machine epsilon (2.22e-16) effectively disables the corresponding termination condition.
+  ftol, xtol, gtol = check_tolerance(ftol, xtol, gtol, method)
+Traceback (most recent call last):
+  File "/home/dnly/stage/madcad/pymadcad/examples/nut.py", line 69, in <module>
+    note_leading(nut.group(5), text='M{}'.format(d)),
+    ^^^^^^^^^^^^
+NameError: name 'note_leading' is not defined
+
+
+## offscreen.py
+Status: error
+----------------------------------------
+Error:
+Traceback (most recent call last):
+  File "/home/dnly/stage/madcad/pymadcad/examples/offscreen.py", line 5, in <module>
+    note = note_leading(cube.group(0), text="this is an annotation")
+           ^^^^^^^^^^^^
+NameError: name 'note_leading' is not defined
+
+
+## planetary-gearbox.py
+Status: ok
+----------------------------------------
+
+## screenshots.py
+Status: error
+----------------------------------------
+Error:
+Traceback (most recent call last):
+  File "/home/dnly/stage/madcad/pymadcad/examples/screenshots.py", line 2, in <module>
+    from madcad.generation import matchclosest
+ImportError: cannot import name 'matchclosest' from 'madcad.generation' (/home/dnly/.local/share/mise/installs/python/3.14.2/lib/python3.14/site-packages/madcad/generation.py)
+
+
+## text.py
+Status: error
+----------------------------------------
+Error:
+Traceback (most recent call last):
+  File "/home/dnly/stage/madcad/pymadcad/examples/text.py", line 16, in <module>
+    label = intersection(
+    		extrusion(
+    ...<3 lines>...
+    		inflate(shape, e),
+    		)
+  File "/home/dnly/.local/share/mise/installs/python/3.14.2/lib/python3.14/site-packages/madcad/boolean.py", line 637, in intersection
+    return boolean(a,b, (True,True))
+  File "/home/dnly/.local/share/mise/installs/python/3.14.2/lib/python3.14/site-packages/madcad/boolean.py", line 625, in boolean
+    return op(a, b, sides, prec)
+  File "/home/dnly/.local/share/mise/installs/python/3.14.2/lib/python3.14/site-packages/madcad/boolean.py", line 262, in boolean_mesh
+    mc2 = pierce_mesh(m2, m1, sides[1], prec)
+  File "/home/dnly/.local/share/mise/installs/python/3.14.2/lib/python3.14/site-packages/madcad/boolean.py", line 166, in pierce_mesh
+    m1, frontier = cut_mesh(m1, m2, prec)
+                   ~~~~~~~~^^^^^^^^^^^^^^
+  File "/home/dnly/.local/share/mise/installs/python/3.14.2/lib/python3.14/site-packages/madcad/boolean.py", line 147, in cut_mesh
+    flat = triangulation.triangulation_closest(segts, normal, prec)
+  File "/home/dnly/.local/share/mise/installs/python/3.14.2/lib/python3.14/site-packages/madcad/triangulation.py", line 693, in triangulation_closest
+    result += triangulation_outline(loop, z, prec)
+              ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/dnly/.local/share/mise/installs/python/3.14.2/lib/python3.14/site-packages/madcad/triangulation.py", line 231, in triangulation_outline
+    raise TriangulationError("no more feasible triangles (algorithm failure or bad input outline)", [outline.indices[i] for i in hole])
+madcad.triangulation.TriangulationError: ('no more feasible triangles (algorithm failure or bad input outline)', [32, 263, 0])
+
+
+## universal-joint.py
+Status: error
+----------------------------------------
+Error:
+Traceback (most recent call last):
+  File "/home/dnly/stage/madcad/pymadcad/examples/universal-joint.py", line 171, in <module>
+    upper = cardan_side(rint*1.02, rext, rext*0.25, thickness, rext*2)
+  File "/home/dnly/stage/madcad/pymadcad/examples/universal-joint.py", line 98, in cardan_side
+    note_radius(result.group('axis')),
+    ^^^^^^^^^^^
+NameError: name 'note_radius' is not defined
+
+
