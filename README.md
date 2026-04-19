@@ -45,20 +45,56 @@ show([b])
 b = brick(min=vec3(-0.5,-0.5,-0.5), max=vec3(0.5,0.5,0.5))
 ```
 
-### Outros Exemplos Afetados
+---
 
-Qualquer função que usa valores默认值 com `-inf`:
-- `square()` pode ter problema similar
-- `parallelogram()` com default infin
+## Docker Development
 
-Sempre use parâmetros explícitos para safety.
+### Quick Start
+
+```bash
+cd pymadcad
+
+# Build
+docker compose build dev
+
+# Shell interativo
+docker compose run --rm dev
+
+# Testes headless
+docker compose run --rm test-headless
+```
+
+### Testes
+
+```bash
+# Todos os testes
+docker compose run --rm test-headless
+
+# Arquivo específico
+docker compose run --rm test-headless pytest tests/test_mesh.py -v
+
+# Teste único
+docker compose run --rm test-headless pytest tests/test_mesh.py::test_function_name -v
+```
+
+### Desenvolvimento
+
+```bash
+# Build Rust extension no container
+docker compose run --rm dev maturin develop
+
+# Com display local (Linux)
+DISPLAY=$DISPLAY docker compose run --rm dev
+```
+
+Ver `DOCKER.md` para documentação completa.
 
 ---
 
-## Ambiente de Teste
+## Ambiente de Teste Local
 
 - **OS**: Arch Linux
-- **Python**: 3.12 ou 3.14
+- **Python**: 3.12
 - **pymadcad**: 1.0.1 (latest)
 - **Display**: DISPLAY=:1
 
@@ -66,10 +102,9 @@ Sempre use parâmetros explícitos para safety.
 
 ```bash
 # Com display
-source venv/bin/activate
 python -c "from madcad import *; b=brick(center=vec3(0,0,0), width=vec3(1,1,1)); show([b])"
 
-# Headless (sem monitor)
+# Headless
 xvfb-run -a python -c "from madcad import *; b=brick(center=vec3(0,0,0), width=vec3(1,1,1)); print('OK')"
 ```
 
