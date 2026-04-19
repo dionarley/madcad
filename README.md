@@ -34,7 +34,12 @@ Incompatibilidade entre uimadcad e pymadcad >= 1.0. uimadcad precisa de `pymadca
 pip install "pymadcad<1.0" --force-reinstall
 ```
 
-Versão testada: **pymadcad 0.20.1** funciona com uimadcad 0.8.0
+Versão testada: **pymadcad 0.19.1** funciona com uimadcad 0.8.0
+
+Também precisa de:
+```bash
+pip install processional
+```
 
 ---
 
@@ -91,6 +96,28 @@ QT_QPA_PLATFORM=wayland python -m uimadcad
 Software rendering:
 ```bash
 LIBGL_ALWAYS_SOFTWARE=1 python -m uimadcad
+```
+
+### Problema 4: GLSL 4.30 not supported
+
+### Sintoma
+```
+_moderngl.Error: GLSL 4.30 is not supported
+```
+
+### Causa
+Placa de vídeo não suporta OpenGL 4.30 (só suporta até 3.30).
+
+### Solução
+Usar software rendering:
+```bash
+export LIBGL_ALWAYS_SOFTWARE=1
+python -m uimadcad
+```
+
+Ou verificar suporte OpenGL:
+```bash
+glxinfo | grep "OpenGL version"
 ```
 
 ---
