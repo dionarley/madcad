@@ -29,9 +29,11 @@ ImportError: cannot import name 'ivec4' from 'madcad.mathutils'
 ### Causa
 Incompatibilidade entre uimadcad e pymadcad >= 1.0. uimadcad precisa de `pymadcad < 1.0`.
 
-### Solução
+### Solução (Arch Linux)
 ```bash
-pip install "pymadcad<1.0" --force-reinstall
+pip install "pymadcad==0.19.1" --force-reinstall
+pip install processional
+pip install uimadcad
 ```
 
 Versão testada: **pymadcad 0.19.1** funciona com uimadcad 0.8.0
@@ -98,24 +100,30 @@ Software rendering:
 LIBGL_ALWAYS_SOFTWARE=1 python -m uimadcad
 ```
 
-### Problema 4: GLSL 4.30 not supported
+### Problema 4: GLSL 4.30 not supported / uimadcad não abre
 
 ### Sintoma
 ```
 _moderngl.Error: GLSL 4.30 is not supported
+# ou a janela abre mas fica travada
 ```
 
 ### Causa
 Placa de vídeo não suporta OpenGL 4.30 (só suporta até 3.30).
 
-### Solução
-Usar software rendering:
+### Solução (FUNCIONA)
 ```bash
+# Software rendering (OBRIGATÓRIO no seu sistema)
 export LIBGL_ALWAYS_SOFTWARE=1
 python -m uimadcad
 ```
 
-Ou verificar suporte OpenGL:
+Para facilitar, adicione no seu ~/.bashrc:
+```bash
+echo 'export LIBGL_ALWAYS_SOFTWARE=1' >> ~/.bashrc
+```
+
+Verificar suporte OpenGL:
 ```bash
 glxinfo | grep "OpenGL version"
 ```
