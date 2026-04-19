@@ -255,6 +255,44 @@ xvfb-run -a python -c "from madcad import *; b=brick(center=vec3(0,0,0), width=v
 
 ---
 
+## Scripts Disponíveis
+
+### Exemplos CLI com Dark Mode
+
+```bash
+# Rodar exemplo com tema escuro
+./run_example_cli.sh pymadcad/examples/bearing.py
+
+# Com tema específico
+./run_example_cli.sh pymadcad/examples/elliptic-gearbox.py dark-green
+
+# Temas disponíveis: grey-orange, dark-red, dark-green
+```
+
+### Kill Processos
+
+```bash
+./kill_madcad.sh
+```
+
+### Notas
+
+- Exemplos no **UI (uimadcad)** funcionam diretamente
+- Exemplos via **CLI** precisam de QApplication primeiro
+- Alguns exemplos não têm `show()` - não abrem janela automaticamente
+- elliptic-gearbox.py não tem show() - precisa adicionar
+
+### Exemplos com show() que abrem janela:
+- bearing.py
+- nut.py
+- universal-joint.py
+- axis-holder.py
+- offscreen.py
+- differential-symetric.py
+- differential-asymetric.py
+
+---
+
 ## Instalação (script.sh)
 
 ```bash
