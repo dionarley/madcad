@@ -1,4 +1,25 @@
-# MadCAD Setup - Problemas e Soluções
+# MadCAD Setup - Problemas e Soluções (Arch Linux + Hyprland)
+
+## Problema 0: Ícone não abre (Arch Linux/hyprland)
+
+### Sintoma
+- Clica no ícone e nada acontece
+- Ou erro: `ModuleNotFoundError: No module named 'madcad'`
+
+### Causa
+1. `/usr/bin/madcad` usa Python sistema que não tem pymadcad
+2. GPU não suporta OpenGL 4.30 → precisa software rendering
+
+### Solução
+
+Editar `/usr/share/applications/madcad.desktop`:
+```ini
+Exec=bash -c "export LIBGL_ALWAYS_SOFTWARE=1; /home/dnly/.local/share/mise/installs/python/3.14.2/bin/python3 -m uimadcad"
+```
+
+(O caminho do Python pode variar: use `which python3` para verificar)
+
+---
 
 ## Problema 1: uimadcad não abre (command not found)
 
