@@ -168,11 +168,47 @@ docker compose run --rm test-headless
 
 ---
 
+## Problema 5: Exemplos do pymadcad com erros
+
+### Sintoma
+Alguns exemplos não executam:
+
+```
+NameError: name 'note_leading' is not defined
+NameError: name 'note_radius' is not defined
+TriangulationError: no more feasible triangles
+```
+
+### Exemplos Testados
+
+**Funcionando (pymadcad 0.19.1):**
+| Exemplo | Status |
+|--------|--------|
+| bearing | ✅ OK |
+| kinematic-planetary | ✅ OK |
+
+**Com bugs:**
+| Exemplo | Erro |
+|--------|------|
+| nut | `note_leading` not defined |
+| axis-holder | `note_leading` not defined |
+| universal-joint | `note_radius` not defined |
+| text | TriangulationError |
+| planetary-gearbox | various |
+
+### Solução
+Usar launcher com exemplos funcionais:
+```bash
+python3 run_example.py
+```
+
+---
+
 ## Ambiente de Teste
 
 - **OS**: Arch Linux (hyprland)
 - **Python**: 3.14
-- **pymadcad**: 0.20.1
+- **pymadcad**: 0.19.1 (compatível com uimadcad)
 - **uimadcad**: 0.8.0
 
 ### Teste Rápido
