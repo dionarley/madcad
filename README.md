@@ -1,55 +1,101 @@
-# MadCAD Setup - Problemas Conhecidos
+# MadCAD Setup - Problemas e Soluções
 
-## Problema: brick() gera coordenadas NaN
+## Problema 1: uimadcad não abre (command not found)
 
 ### Sintoma
-
-```python
-from madcad import *
-b = brick()
-print(b.points)
-# Output: [dvec3(-nan, -nan, -nan), ...]
+```
+$ uimadcad
+bash: command not found: uimadcad
 ```
 
-### Causa Raiz
-
-A função `brick()` usa `Box` com valores padrão:
-- `center=vec3(0)` 
-- `width=vec3(-inf)` (infinito negativo)
-
-Ao calcular `box.min = center - width/2`:
-- `-inf/2 = inf` (infinito positivo)
-- `box.min = vec3(0,0,0) - vec3(inf)` = `inf`
-- `box.max = vec3(0,0,0) + vec3(inf)` = `inf`
-
-Mas a matemática `inf - inf = nan` (indeterminação):
-- `box.center = (min + max)/2 = (inf + (-inf))/2 = nan`
-
-Isso propaga para todas as coordenadas do mesh.
+### Causa
+uimadcad não foi instalado ou não está no PATH.
 
 ### Solução
+```bash
+pip install uimadcad
+python -m uimadcad  # ou uimadcad se estiver no PATH
+```
 
-Use parâmetros explícitos:
+---
 
+## Problema 2: uimadcad crash com ImportError (ivec4)
+
+### Sintoma
+```
+ImportError: cannot import name 'ivec4' from 'madcad.mathutils'
+```
+
+### Causa
+Incompatibilidade entre uimadcad e pymadcad >= 1.0. uimadcad precisa de `pymadcad < 1.0`.
+
+### Solução
+```bash
+pip install "pymadcad<1.0" --force-reinstall
+```
+
+Versão testada: **pymadcad 0.20.1** funciona com uimadcad 0.8.0
+
+---
+
+## Problema 3: brick() gera coordenadas NaN
+
+### Sintoma
 ```python
 from madcad import *
-
-# Errado - gera NaN:
 b = brick()
+print(b.points)  # [dvec3(-nan, -nan, -nan), ...]
+```
 
-# Correto - fornece center e width finitos:
+### Causa
+Valores padrão `-inf` causam `inf - inf = nan` no cálculo de Box.
+
+### Solução
+Use parâmetros explícitos:
+```python
 b = brick(center=vec3(0,0,0), width=vec3(1,1,1))
-show([b])
-
-# Ou use dimensões específicas:
+# ou
 b = brick(min=vec3(-0.5,-0.5,-0.5), max=vec3(0.5,0.5,0.5))
 ```
 
 ---
 
-## Docker Development
+## Instalação Completa (Arch Linux)
 
-### Quick Start
+```bash
+# 1. Dependências do sistema (Arch)
+sudo pacman -S python-pip python-virtualenv \
+    libglvnd opencl-header mesa glfw \
+    qt5-base qt5-x11extras
+
+# 2. Instalar pymadcad versão compatível
+pip install "pymadcad<1.0"
+
+# 3. Instalar uimadcad
+pip install uimadcad
+
+# 4. Testar
+python -c "from madcad import *; print('OK')"
+python -m uimadcad
+```
+
+---
+
+## Hyprland/Wayland
+
+Para rodar com Hyprland:
+```bash
+QT_QPA_PLATFORM=wayland python -m uimadcad
+```
+
+Software rendering:
+```bash
+LIBGL_ALWAYS_SOFTWARE=1 python -m uimadcad
+```
+
+---
+
+## Docker
 
 ```bash
 cd pymadcad
@@ -57,46 +103,21 @@ cd pymadcad
 # Build
 docker compose build dev
 
-# Shell interativo
+# Development
 docker compose run --rm dev
 
 # Testes headless
 docker compose run --rm test-headless
 ```
 
-### Testes
-
-```bash
-# Todos os testes
-docker compose run --rm test-headless
-
-# Arquivo específico
-docker compose run --rm test-headless pytest tests/test_mesh.py -v
-
-# Teste único
-docker compose run --rm test-headless pytest tests/test_mesh.py::test_function_name -v
-```
-
-### Desenvolvimento
-
-```bash
-# Build Rust extension no container
-docker compose run --rm dev maturin develop
-
-# Com display local (Linux)
-DISPLAY=$DISPLAY docker compose run --rm dev
-```
-
-Ver `DOCKER.md` para documentação completa.
-
 ---
 
-## Ambiente de Teste Local
+## Ambiente de Teste
 
-- **OS**: Arch Linux
-- **Python**: 3.12
-- **pymadcad**: 1.0.1 (latest)
-- **Display**: DISPLAY=:1
+- **OS**: Arch Linux (hyprland)
+- **Python**: 3.14
+- **pymadcad**: 0.20.1
+- **uimadcad**: 0.8.0
 
 ### Teste Rápido
 
@@ -110,7 +131,7 @@ xvfb-run -a python -c "from madcad import *; b=brick(center=vec3(0,0,0), width=v
 
 ---
 
-## Instalação
+## Instalação (script.sh)
 
 ```bash
 chmod +x script.sh
